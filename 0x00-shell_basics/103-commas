@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -lamvF
+ls -lamv | pr -dt

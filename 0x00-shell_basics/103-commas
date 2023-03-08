@@ -1,0 +1,3 @@
+#!/bin/bash
+ls -lamv
+echo -e "\n"

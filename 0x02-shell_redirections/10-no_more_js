@@ -1,2 +1,2 @@
 #!/bin/bash
-find . type js | rm
+find . -type js | rm

@@ -1,2 +1,2 @@
 #!/bin/bash
-find . -type f -empty |wc -l 
+ls -a | find . -type f -empty

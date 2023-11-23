@@ -1,0 +1,1 @@
+THe tasks shows the power of input and output redirection

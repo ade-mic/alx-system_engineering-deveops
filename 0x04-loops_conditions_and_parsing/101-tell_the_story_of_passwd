@@ -4,7 +4,7 @@
 # group id
 # Home directory path for the user
 
-while IFS=: read -r USERNAME PASSWORD uuid GROUP_ID  GECOS HOME_DIRECTORY SHELL
+while IFS=: read USERNAME PASSWORD uuid GROUP_ID  GECOS HOME_DIRECTORY SHELL
 do
     echo "The user $USERNAME is part of the $GROUP_ID gang,\
     lives in $HOME_DIRECTORY and rides $SHELL.\

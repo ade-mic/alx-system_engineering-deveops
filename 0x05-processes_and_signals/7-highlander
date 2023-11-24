@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# bash script that displays To infinity and beyond indefinitely
+i=0
+# Init a flag to track whether SIGTERM is recieved
+sigterm_received=false
+# Defien the handler function for sigterm
+handle 
+while [ $i -eq 0 ]; do
+       echo "To infinity and beyond"
+       sleep 2
+done

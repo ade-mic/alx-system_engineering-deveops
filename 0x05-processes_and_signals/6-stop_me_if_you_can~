@@ -4,8 +4,4 @@ process_name="4-to_infinity_and_beyond"
 pid=$(pgrep  -f "$process_name")
 if [[ -n "$pid" ]]; then
 kill "$pid"
-<<<<<<< HEAD
 fi
-=======
-fi
->>>>>>> 1b7a048f58e66b21bf1a4cd59053250b82d0a1f9

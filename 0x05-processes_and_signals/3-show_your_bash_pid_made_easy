@@ -9,6 +9,6 @@ do
     if [[ "$process_name" == *bash* ]]; then
         # extract PID from the directory name
         pid=$(basename "$proc_dir")
-        echo "$pid $process_name"
+        echo "$pid bash"
     fi
 done

@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# bash script that displays To infinity and beyond indefinitely
+# Get the process Id of the current script
+PID=$$
+# Create the file /var/run/myscript.pid and write to it
+echo $PID > /var/run/myscript.pid
+# initialize a variable for infinite loop
+i=0
+# Init a flag to track whether SIGTERM is recieved
+sigterm_received=false
+# Define the handler function for sigterm
+handle_sigterm() {
+       sigterm_received=true
+}
+# init a flag for SIGINT
+sigint_recieved=false
+# define the handler for sigint
+handle_sigint() {
+       sigint_recieved=true
+}
+# init flag for SIGQUIT
+sigquit_received=false
+# Deletes the file /var/run/myscript.pid and
+# terminates itself when receiving a SIGQUIT or SIGTERM signal 
+handle_sigquit() {
+       sigquit_recived=true
+}
+trap 'handle_sigterm' SIGTERM
+trap 'handle_sigint' SIGINT
+trap 'handle_sigquit' SIGQUIT
+while [ $i -eq 0 ]; do
+       if $sigterm_received; then
+              echo "I hate the kill command"
+              rm /var/run/myscript.pid
+              sigterm_received=false
+       elif $sigint_recieved; then
+              echo "Y U no love me?!"
+              sigint_recieved=false
+              i=1
+       elif $sigquit_received; then
+              rm /var/run/myscript.pid
+              sigquit_received=false
+       else
+              echo "To infinity and beyond"
+              sleep 2
+       fi
+done

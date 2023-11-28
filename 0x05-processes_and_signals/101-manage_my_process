@@ -11,7 +11,7 @@ start() {
 # a function to stop manage_my_process
 stop() {
        if [ -f /var/run/my_process.pid ]; then
-              kill $PID
+              kill -9 $(cat /var/run/my_process.pid)
               rm /var/run/my_process.pid
               echo "manage_my_process stopped"
        fi
@@ -36,5 +36,5 @@ elif [[ $1 == "restart" ]]; then
        restart
 else
        # the arguement is invalid
-       echo "Usage: manage_my_process {start|stop|restart}"
+       echo "manage_my_process {start|stop|restart}"
 fi

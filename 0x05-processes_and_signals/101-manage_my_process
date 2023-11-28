@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-11;rgb:0000/0000/0000# manages manage_my_process 
+# manage_my_process 
 # A function that starts the manage_my_process
 start() {
        # Run manage_my_process at background

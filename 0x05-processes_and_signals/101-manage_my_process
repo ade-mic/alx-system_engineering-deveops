@@ -13,7 +13,7 @@ stop() {
        if [ -f /var/run/my_process.pid ]; then
               kill $PID
               rm /var/run/my_process.pid
-              echp "manage_my_process stopped"
+              echo "manage_my_process stopped"
        fi
 }
 # a functipn that restarts manage_my_process
@@ -28,13 +28,13 @@ restart() {
        fi
 }
 # check the arguement to call 
-if [ $1 == "start" ]; then
+if [[ $1 == "start" ]]; then
        start
-elif [ $1 == "stop" ]; then
+elif [[ $1 == "stop" ]]; then
        stop
-elif [ $1 == "restart" ]; then
+elif [[ $1 == "restart" ]]; then
        restart
 else
        # the arguement is invalid
-       echo "manage_my_process {start|stop|restart}"
+       echo "Usage: manage_my_process {start|stop|restart}"
 fi

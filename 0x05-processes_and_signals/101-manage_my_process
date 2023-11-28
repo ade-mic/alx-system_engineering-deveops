@@ -11,7 +11,7 @@ start() {
 # a function to stop manage_my_process
 stop() {
        if [ -f /var/run/my_process.pid ]; then
-              kill -9 $(cat /var/run/my_process.pid)
+              kill -9 "$(cat /var/run/my_process.pid)"
               rm /var/run/my_process.pid
               echo "manage_my_process stopped"
        fi

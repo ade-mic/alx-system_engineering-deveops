@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# a Bash script that configures an Ubuntu server with the below requirements.
+# Requirements:
+# localhost resolves to 127.0.0.2
+# facebook.com resolves to 8.8.8.8.
+
+# resolve docker issue
+cp /etc/hosts ~/hosts.new
+sed -i "s/localhost./127.0.0.2 localhost/" ~/hosts.new
+sed -i "s/.facebook.com./8.8.8.8 facebook/" ~/hosts.new
+cp -f ~/hosts.new /etc/hosts

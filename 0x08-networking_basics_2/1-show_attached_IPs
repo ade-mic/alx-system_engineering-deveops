@@ -6,8 +6,8 @@ for interface in $(ip -4 -o link show | awk "{print $2}" | cut -d: -f1); do
     ip_and_mask=$(ip -4 -o addr show "$interface" | awk "{print $4}")
     # check if the IPv4 address and mask bt  the slash character
     if [ -n "$ip_and_mask" ]; then
-       ip=$(echo "ip_and_mask" | cut -d/ -f1)
+       ip_add=$(echo "ip_and_mask" | cut -d/ -f1)
         # Display the interface name and the IPv4 address
-        echo "$ip"
+        echo "$ip_add"
     fi
 done

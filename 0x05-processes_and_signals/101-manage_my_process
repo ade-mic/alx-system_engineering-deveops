@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# manage_my_process 
+# A function that starts the manage_my_process
+start() {
+       # Run manage_my_process at background
+       ./manage_my_process & PID=$!
+       # create a PID file
+       echo $PID > /var/run/my_process.pid
+       echo "manage_my_process started"
+}
+# a function to stop manage_my_process
+stop() {
+       if [ -f /var/run/my_process.pid ]; then
+              kill -9 "$(cat /var/run/my_process.pid)"
+              rm /var/run/my_process.pid
+              echo "manage_my_process stopped"
+       fi
+}
+# a functipn that restarts manage_my_process
+restart() {
+              if [ -f /var/run/my_process.pid ]; then
+		  # stop
+		  kill -9 "$(cat /var/run/my_process.pid)"
+		  rm /var/run/my_process.pid
+		  # call the star function
+		  ./manage_my_process & PID=$!
+		  # create a PID file                                                                                        
+		  echo $PID > /var/run/my_process.pid
+		  # display message
+		  echo "manage_my_process restarted"
+	      fi
+}
+# check the arguement to call 
+if [[ $1 == "start" ]]; then
+       start
+elif [[ $1 == "stop" ]]; then
+       stop
+elif [[ $1 == "restart" ]]; then
+       restart
+else
+       # the arguement is invalid
+       echo "Usage: manage_my_process {start|stop|restart}"
+fi

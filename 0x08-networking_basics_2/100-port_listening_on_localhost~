@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# a Bash script that shows all active IPv4 IPs on the machine its executed on
+
+# loop through all the network interface using the ip command
+for interface in $(ip -4 -o link show | awk "{print $2}" | cut -d: -f1); do
+    ip_and_mask=$(ip -4 -o addr show "$interface" | awk "{print $4}")
+    # check if the IPv4 address and mask bt  the slash character
+    if [ -n "$ip_and_mask" ]; then
+       ip_add=$(echo "ip_and_mask" | cut -d/ -f1)
+        # Display the interface name and the IPv4 address
+        echo "$ip_add"
+    fi
+done

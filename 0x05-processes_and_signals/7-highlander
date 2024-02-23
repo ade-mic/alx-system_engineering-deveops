@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# bash script that displays To infinity and beyond indefinitely
+i=0
+# Init a flag to track whether SIGTERM is recieved
+sigterm_received=false
+# Defien the handler function for sigterm
+handle_sigterm() {
+       sigterm_received=true
+}
+trap 'handle_sigterm' SIGTERM
+
+while [ $i -eq 0 ]; do
+       echo "To infinity and beyond"
+       sleep 2
+       if $sigterm_received; then
+              echo "I am invincible!!!"
+              sigterm_received=false
+       else
+              echo "To infinity and beyond"
+              sleep 2
+       fi
+done

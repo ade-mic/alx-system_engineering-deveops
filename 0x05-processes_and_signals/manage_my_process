@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# indefinitely writes I am alive! to the /tmp/my_process
+# the message pause for 2 seconds
+# init a infinite loop variable
+i=0
+while [ $i -eq 0 ]; do
+    echo "I am alive!" > /tmp/my_process
+    sleep 2
+done

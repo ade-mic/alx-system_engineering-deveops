@@ -1,11 +1,13 @@
 # make changes to SSH  configuration file
-file { '/home/ubuntu/.ssh/config':
-ensure  => present,
-content => "
-Host 352442-web-01
-    HostName 54.85.90.192
-    User ubuntu
-    IdentityFile ~/.ssh/school
-    PasswordAuthentication no
-",
+file_line { 'change identity_file':
+ensure => present,
+path   => '/etc/ssh/ssh_config',
+line   => 'IdentifyFile ~/.ssh/school',
+}
+
+file_line { 'ssh passwordauth':
+ensure => present,
+path   => '/etc/ssh/ssh_config',
+line   => 'PasswordAuthentication no',
+match  => '^#?PasswordAuthentication',
 }

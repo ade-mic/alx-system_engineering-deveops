@@ -1,3 +1,4 @@
+# make changes to SSH  configuration file
 file { '~/.ssh/config':
 ensure  => present,
 content => "

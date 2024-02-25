@@ -1,32 +1,16 @@
-# Puppet manifest to configure SSH client
+# Define the SSH client configuration file path
+$ssh_config_file = '/etc/ssh/ssh_config'
 
-# Ensure SSH directory exists
-file { '/home/vagrant/.ssh':
-  ensure => directory,
-  mode   => '0700',
-  owner  => 'vagrant',
-  group  => 'vagrant',
-}
-
-# Copy private key to SSH directory
-file { '/home/vagrant/.ssh/school':
+# Ensure SSH client configuration file includes the line to use the private key
+file_line { 'Declare identity file':
+  path   => $ssh_config_file,
+  line   => '    IdentityFile ~/.ssh/school',
   ensure => present,
-  source => 'puppet:///modules/ssh/school',
-  mode   => '0600',
-  owner  => 'vagrant',
-  group  => 'vagrant',
 }
 
-# Ensure SSH client configuration file exists
-file { '/home/vagrant/.ssh/config':
-  ensure  => present,
-  mode    => '0600',
-  owner   => 'vagrant',
-  group   => 'vagrant',
-  content => "
-    Host example-server
-      HostName example.com
-      IdentityFile ~/.ssh/school
-      PasswordAuthentication no
-  ",
+# Ensure SSH client configuration file includes the line to refuse password authentication
+file_line { 'Turn off passwd auth':
+  path   => $ssh_config_file,
+  line   => '    PasswordAuthentication no',
+  ensure => present,
 }

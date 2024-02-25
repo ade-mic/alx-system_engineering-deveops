@@ -1,5 +1,5 @@
 # make changes to SSH  configuration file
-file { '~/.ssh/config':
+file { '/home/ademich/.ssh/config':
 ensure  => present,
 content => "
 Host 352442-web-01

@@ -1,5 +1,5 @@
 # make changes to SSH  configuration file
-file { '/home/vagrant/.ssh/config':
+file { '/home/ubuntu/.ssh/config':
 ensure  => present,
 content => "
 Host 352442-web-01

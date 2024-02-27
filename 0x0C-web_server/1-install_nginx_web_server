@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 # Update package index
-sudo apt-get update
+apt-get update
 
 # Install nginx
-sudo apt-get install -y nginx
+apt-get install -y nginx
 
-sudo chmod o+w /var/www/html
+chmod o+w /var/www/html
 
 # Configure nginx to serve "Hello World!" at the root
-echo "Hello World!" | sudo tee /var/www/html/index.html
+echo "Hello World!" | tee /var/www/html/index.html
 
 # Restart nginx (alternative to systemctl)
-sudo service nginx restart
+service nginx restart
 
 # Check if nginx is running
 if pgrep -x "nginx" >/dev/null

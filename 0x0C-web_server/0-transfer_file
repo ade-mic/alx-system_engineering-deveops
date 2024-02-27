@@ -11,7 +11,7 @@ USERNAME="$3";
 PATH_TO_SSH_KEY="$4";
 # use scp command to transfer from client to server
 if [ $# -eq 3 ]; then
-    scp -o StrictHostKeyChecking=no "$PATH_TO_FILE" "$USERNAME@$IP":/~
+    scp -o StrictHostKeyChecking=no "$PATH_TO_FILE" "$USERNAME@$IP":~/
 else
-    scp -o StrictHostKeyChecking=no -i "$PATH_TO_SSH_KEY" "$PATH_TO_FILE" "$USERNAME@$IP":/~
+    scp -o StrictHostKeyChecking=no -i "$PATH_TO_SSH_KEY" "$PATH_TO_FILE" "$USERNAME@$IP":~/
 fi

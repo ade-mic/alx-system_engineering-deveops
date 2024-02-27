@@ -23,7 +23,7 @@ server {
         echo "HTTP/1.1 200 OK";
         echo "Content-Type: text/plain";
         echo "";
-        echo "Hello World!";
+        echo -e "Hello World!\n";
     }
 }
 EOF

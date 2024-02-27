@@ -9,7 +9,7 @@ sudo apt-get install -y nginx
 sudo chmod o+w /var/www/html
 
 # Configure nginx to serve "Hello World!" at the root
-sudo echo "Hello World!" > /var/www/html/index.html
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
 # Restart nginx (alternative to systemctl)
 sudo service nginx restart

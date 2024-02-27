@@ -6,7 +6,20 @@ sudo apt-get -y update
 sudo apt-get -y install nginx
 
 # create a simple "Hello Wordls"
-echo "Hello World!" | sudo tee /var/www/html/index.html
+echo "
+server {
+       listen 80;
+       server_name _;
+       location / {
+       return 200 'Hello World!';
+       }
+}
+" | sudo tee /var/www/html/index.html
+# Create a symbolic link to enable the custom configuration
+sudo ln -s /etc/nginx/sites-available/custom.conf /etc/nginx/sites-enabled/
+
+# Remove the default Nginx configuration (if needed)
+sudo rm /etc/nginx/sites-enabled/default
 
 # start nginx service
 sudo service nginx start

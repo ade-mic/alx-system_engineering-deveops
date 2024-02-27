@@ -5,28 +5,11 @@ sudo apt-get -y update
 # install nginx
 sudo apt-get -y install nginx
 
-sudo tee /etc/nginx/sites-available/default >/dev/null <<EOF
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
+# listen on port 80
+sudo ufw allow 'Nginx HTTP'
 
-    root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
-
-    server_name _;
-
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-
-    location = / {
-        echo "HTTP/1.1 200 OK";
-        echo "Content-Type: text/plain";
-        echo "";
-        echo -e "Hello World!\n";
-    }
-}
-EOF
+# Create a simple "Hello World" page
+echo 'Hello World' | sudo tee /var/www/html/index.html
 
 # start nginx service
 sudo service nginx start

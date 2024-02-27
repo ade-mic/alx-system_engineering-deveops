@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Update package index
+apt-get update
+
+# Install nginx
+apt-get install -y nginx
+
+chmod o+w /var/www/html
+
+# Configure nginx to serve "Hello World!" at the root
+echo "Hello World!" | tee /var/www/html/index.html
+
+# Define the redirection configuration
+config_block="location /redirect_me {
+    return 301 http://example.com/new_page;
+}"
+
+# Add the redirection configuration to Nginx default server block
+sudo sed -i '/server {/a '"$config_block"'' /etc/nginx/sites-available/default
+
+# Restart nginx (alternative to systemctl)
+service nginx restart
+
+# Check if nginx is running
+if pgrep -x "nginx" >/dev/null
+then
+    echo "Nginx is running."
+else
+    echo "Nginx failed to start. Check configuration."
+fi

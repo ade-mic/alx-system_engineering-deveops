@@ -1,15 +1,23 @@
 #!/usr/bin/env bash
-# Update the package information
-sudo apt-get -y update
 
-# install nginx
-sudo apt-get -y install nginx
+# Update package index
+sudo apt-get update
 
-# listen on port 80
-sudo ufw allow 'Nginx HTTP'
+# Install nginx
+sudo apt-get install -y nginx
 
-# Create a simple "Hello World" page
-echo 'Hello World' | sudo tee /var/www/html/index.html
+sudo chmod o+w /var/www/html
 
-# start nginx service
-sudo service nginx start
+# Configure nginx to serve "Hello World!" at the root
+sudo echo "Hello World!" > /var/www/html/index.html
+
+# Restart nginx (alternative to systemctl)
+sudo service nginx restart
+
+# Check if nginx is running
+if pgrep -x "nginx" >/dev/null
+then
+    echo "Nginx is running."
+else
+    echo "Nginx failed to start. Check configuration."
+fi

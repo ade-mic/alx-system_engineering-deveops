@@ -5,21 +5,28 @@ sudo apt-get -y update
 # install nginx
 sudo apt-get -y install nginx
 
-# create a simple "Hello Wordls"
-echo "
+sudo tee /etc/nginx/sites-available/default >/dev/null <<EOF
 server {
-       listen 80;
-       server_name _;
-       location / {
-       return 200 'Hello World!';
-       }
-}
-" | sudo tee /var/www/html/index.html
-# Create a symbolic link to enable the custom configuration
-sudo ln -s /etc/nginx/sites-available/custom.conf /etc/nginx/sites-enabled/
+    listen 80 default_server;
+    listen [::]:80 default_server;
 
-# Remove the default Nginx configuration (if needed)
-sudo rm /etc/nginx/sites-enabled/default
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+
+    server_name _;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    location = / {
+        echo "HTTP/1.1 200 OK";
+        echo "Content-Type: text/html";
+        echo "";
+        echo "Hello World!";
+    }
+}
+EOF
 
 # start nginx service
 sudo service nginx start

@@ -20,12 +20,12 @@ sudo bash -c "cat > /var/www/html/404.html <<EOF
 </head>
 <body>
 <h1>404 Not Found</h1>
-<p>Ceci n'est pas une page.</p>
+<p>Ceci n\'est pas une page.</p>
 </body>
 </html>
 EOF"
 
-# Configure redirection
+# Configure redirection and custom 404 page
 sudo bash -c "cat > /etc/nginx/sites-available/default <<EOF
 server {
     listen 80 default_server;
@@ -37,7 +37,7 @@ server {
     server_name _;
 
     location /redirect_me {
-        return 404 /404.html;
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
     }
 
     location / {
@@ -46,8 +46,7 @@ server {
 
     error_page 404 /404.html;
 }
-EOF
-"
+EOF"
 
 # Restart nginx
 sudo service nginx restart

@@ -46,7 +46,8 @@ server {
 
     error_page 404 /404.html;
 }
-EOF"
+EOF
+"
 
 # Restart nginx
 sudo service nginx restart

@@ -11,8 +11,22 @@ sudo chmod o+w /var/www/html
 # Configure nginx to serve "Hello World!" at the root
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
+# Create custom 404 page
+sudo bash -c "cat > /var/www/html/404.html <<EOF
+<!DOCTYPE html>
+<html>
+<head>
+<title>404 Not Found</title>
+</head>
+<body>
+<h1>404 Not Found</h1>
+<p>Ceci n'est pas une page.</p>
+</body>
+</html>
+EOF"
+
 # Configure redirection
-sudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF
+sudo bash -c "cat > /etc/nginx/sites-available/default <<EOF
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
@@ -31,13 +45,8 @@ server {
     }
 
     error_page 404 /404.html;
-    location = /404.html {
-        root /var/www/html;
-        internal;
-        echo "Ceci n'est pas une page";
-    }
 }
-EOF'
+EOF"
 
 # Restart nginx
 sudo service nginx restart

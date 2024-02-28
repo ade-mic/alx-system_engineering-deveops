@@ -26,7 +26,7 @@ sudo bash -c "cat > /var/www/html/404.html <<EOF
 EOF"
 
 # Configure redirection and custom 404 page
-sudo bash -c "cat > /etc/nginx/sites-available/default <<EOF
+sudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
@@ -46,7 +46,7 @@ server {
 
     error_page 404 /404.html;
 }
-EOF"
+EOF'
 
 # Restart nginx
 sudo service nginx restart

@@ -10,13 +10,9 @@ chmod o+w /var/www/html
 # Configure nginx to serve "Hello World!" at the root
 echo "Hello World!" | tee /var/www/html/index.html
 
-# Define the redirection configuration
-config_block="location /redirect_me {
-    return 301 http://example.com/new_page;
-}"
-
-# Add the redirection configuration to Nginx default server block
-sudo sed -i '/server {/a '"$config_block"'' /etc/nginx/sites-available/default
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
+replacement="servername ;\n\tlocation /redirectme {\n\t\t return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}"
+sed -i "s/server_name ;/$replacement/" /etc/nginx/sites-available/default
 
 # Restart nginx (alternative to systemctl)
 service nginx restart

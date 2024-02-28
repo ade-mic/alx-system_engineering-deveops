@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# Update package index
+sudo apt-get update
+
+# Install nginx
+sudo apt-get install -y nginx
+
+# Allow write permissions to nginx html directory
+sudo chmod o+w /var/www/html
+
+# Configure nginx to serve "Hello World!" at the root
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Configure redirection
+sudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+
+    server_name _;
+
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    error_page 404 /404.html;
+    location = /404.html {
+        root /var/www/html;
+        internal;
+        echo "Ceci n'est pas une page";
+    }
+}
+EOF'
+
+# Restart nginx
+sudo service nginx restart
+
+# Check if nginx is running
+if pgrep -x "nginx" >/dev/null; then
+    echo "Nginx is running."
+else
+    echo "Nginx failed to start. Check configuration."
+fi

@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Update package index
+sudo apt-get update
+
+# Install nginx
+sudo apt-get install -y nginx
+
+# Allow write permissions to nginx html directory
+sudo chmod o+w /var/www/html
+
+# Configure nginx to serve "Hello World!" at the root
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Defining the custom header value
+custom_header="X-Served-By: $(hostname)"
+
+# Configure redirection
+echo "add_header $custom_header;" | sudo tee -a /etc/ngix.conf
+
+# Restart nginx
+sudo service nginx restart
+
+# Check if nginx is running
+if pgrep -x "nginx" >/dev/null; then
+    echo "Nginx is running."
+else
+    echo "Nginx failed to start. Check configuration."
+fi

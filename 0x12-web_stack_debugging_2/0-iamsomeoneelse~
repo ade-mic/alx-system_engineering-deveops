@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# a Bash script that accepts one argument
+if [ $# -ne 1]; then
+   echo "Usage: $0 <username>"
+   exit 1
+
+fi
+
+# Get the username from the arguement
+username="$1"
+
+# Run whoami command for the specified user
+whoami_result=$(whoami)
+if [ "$whoami_result" = "$username" ]; then
+   echo "$whoami_result"
+fi

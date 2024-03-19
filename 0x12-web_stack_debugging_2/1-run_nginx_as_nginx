@@ -8,7 +8,8 @@ if ! command -v nginx &> /dev/null; then
 fi
 
 # configure Nginx to run as nginx user
-sudo sed -i 's/user www-data;/user nginx;/' /etc/nginx/nginx.conf
+sed -i 's/user\s*nginx;/user nginx;/g' /etc/nginx/nginx.conf
+sed -i 's/user\s*nginx;/user nginx;/g' /etc/nginx/sites-available/default
 
 # Listen on all active IPs (0.0.0.0) on port 8080
 sudo sed -i 's/listen 80;/listen 8080;/' /etc/nginx/sites-available/default

@@ -3,15 +3,15 @@
 
 # Install Nginx (if not already installed)
 if ! command -v nginx &> /dev/null; then
-   apt-get update
-   apt-get install -y nginx
+   sudo apt-get update
+   sudo apt-get install -y nginx
 fi
 
 # configure Nginx to run as nginx user
-sed -i 's/user www-data;/user nginx;/' /etc/nginx/nginx.conf
+sudo sed -i 's/user www-data;/user nginx;/' /etc/nginx/nginx.conf
 
 # Listen on all active IPs (0.0.0.0) on port 8080
-sed -i 's/listen 80;/listen 8080;/' /etc/nginx/sites-available/default
+sudo sed -i 's/listen 80;/listen 8080;/' /etc/nginx/sites-available/default
 
 # Restart Nginx
-service nginx restart
+sudo service nginx restart

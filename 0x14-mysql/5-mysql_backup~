@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# a Bash script that generates a MySQL dump and creates a compressed archive out of it
+
+# check if the correct number of argue,emt is provided
+if [ $# -ne 1 ]; then
+   echo "Usage: $0 <password>"
+   exit 1
+fi
+
+# set the output directory
+
+# Get the current date in the desired format
+current_date=$(date +'%d-%m-%y')
+
+# MySQL dump command
+mysqldump -u root -p "$1" --all-databases > backup.sql
+
+# Create a compressed tar.gz archive with the current date in the filename
+tar -czvf "$DATE.tar.gz" backup.sql
+
+# Remove the backup.sql file after creating the archive
+rm backup.sql
+
+echo "MySQL backup completed: $DATE.tar.gz"

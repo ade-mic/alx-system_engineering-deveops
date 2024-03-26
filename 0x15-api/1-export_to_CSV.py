@@ -21,7 +21,6 @@ def main():
     # Fetch uer data
     user_response = requests.get(user_url)
     user_data = user_response.json()
-    employee_name = user_data['name']
     user_id = user_data['id']
     user_name = user_data['username']
 
@@ -30,8 +29,7 @@ def main():
     todo_data = todo_response.json()
 
     # Prepare CSV data
-    csv_data = [['{}'.format(user_id), '{}'.format(user_name),
-                 '{}'.format(task['completed']), '{}'.format(task['title'])]
+    csv_data = [[user_id, user_name, task['completed'], task['title']]
                 for task in todo_data]
 
     # Write CSV file

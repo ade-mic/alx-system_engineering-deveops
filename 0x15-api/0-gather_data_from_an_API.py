@@ -5,8 +5,8 @@ information about his/her TODO list progress.
 """
 
 import json
-from sys import argv
 import requests
+from sys import argv
 
 
 def main():

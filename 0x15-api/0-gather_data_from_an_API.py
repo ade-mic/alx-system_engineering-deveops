@@ -4,8 +4,8 @@ a Python script that, using this REST API, for a given employee ID, returns
 information about his/her TODO list progress.
 """
 
-from sys import argv
 import json
+from sys import argv
 import requests
 
 
@@ -36,7 +36,7 @@ def main():
         employee_name, completed_tasks, total_tasks))
     for task in todo_data:
         if task['completed']:
-            print('\t{}'.format(task['title']))
+            print('\t {}'.format(task['title']))
 
 
 if __name__ == "__main__":

@@ -6,6 +6,8 @@ If an invalid subreddit is given, the function should return 0
 """
 import requests
 import json
+
+
 def number_of_subscribers(subreddit):
     """
     Args: subreddit
@@ -29,4 +31,3 @@ def number_of_subscribers(subreddit):
     except requests.RequestException as e:
         print(f"An error occurred: {e}")
         return 0
-    

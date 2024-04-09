@@ -12,7 +12,7 @@ def top_ten(subreddit):
     the first 10 hot posts for a given subreddit.
     if not a valid subreddit prints None"""
     try:
-        url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=10"
+        url = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
         headers = {'User-Agent': 'my_reddit_bot/1.0'}
         response = requests.get(url, headers=headers,
                                 allow_redirects=False, timeout=5)

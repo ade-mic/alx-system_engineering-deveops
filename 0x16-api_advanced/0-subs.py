@@ -12,7 +12,8 @@ def number_of_subscribers(subreddit):
     headers = {'User-Agent': 'Custom Subscriber'}
 
     # make request to Reddit API
-    response = requests.get(url, headers=headers, timeout=5, allow_redirects=False)
+    response = requests.get(url, headers=headers,
+                            timeout=5, allow_redirects=False)
     # Check if the subreddit is valid by looking at the status code
     if response.status_code == 200:
         # Parse the JSON response and return the subscriber count

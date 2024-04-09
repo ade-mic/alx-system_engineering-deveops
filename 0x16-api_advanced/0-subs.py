@@ -5,15 +5,9 @@ function that queries the Reddit API and returns the number of subscribers
 If an invalid subreddit is given, the function should return 0
 """
 import requests
-import json
 
 
 def number_of_subscribers(subreddit):
-    """
-    Args: subreddit
-    queries the Reddit API and returns the number of subscribers
-    If not a valid subreddit, return 0.
-    """
     url = f'https://www.reddit.com/r/{subreddit}/about.json'
     headers = {'User-Agent': 'subreddit_subscriber_counter/0.1'}
 
